@@ -1,30 +1,50 @@
 package com.kdramawiki.kdramas.Entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table; 
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint; 
 
-@Entity
-@Table
+@Entity 
+@Table(name = "kdrama",
+        uniqueConstraints = {
+            @UniqueConstraint(name = "kdrama_name_unique", columnNames = "name"),
+        }
+    )
 public class Kdrama {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id") // Es buena práctica
     private Long id;
+
+    @Column(nullable = false) 
     private String name;
+
     private LocalDate date;
+
+    @Column(name = "description",
+            columnDefinition = "TEXT") // -> indica el tipo de dato de la columna
     private String description;
+
     private String genre;
     private float rating;
     private String country;
     private String language;
 
-    public Kdrama(Long id, String name, LocalDate date, 
-                String description, String genre, float rating, String country, 
-                String language) {
+    @ManyToMany(mappedBy = "drama")
+    private List<DramaList> list = new ArrayList<>();
+
+    public Kdrama(Long id, String name, LocalDate date, String description, String genre, float rating, String country,
+            String language, List<DramaList> list) {
         this.id = id;
         this.name = name;
         this.date = date;
@@ -33,6 +53,7 @@ public class Kdrama {
         this.rating = rating;
         this.country = country;
         this.language = language;
+        this.list = list;
     }
 
     public Kdrama() {
@@ -102,13 +123,19 @@ public class Kdrama {
         this.language = language;
     }
 
+    public List<DramaList> getList() {
+        return list;
+    }
+
+    public void setList(List<DramaList> list) {
+        this.list = list;
+    }
+
     @Override
     public String toString() {
         return "Kdrama [country=" + country + ", date=" + date + ", description=" + description + ", genre=" + genre
-                + ", id=" + id + ", language=" + language + ", name=" + name + ", rating=" + rating + "]";
+                + ", id=" + id + ", language=" + language + ", list=" + list + ", name=" + name + ", rating=" + rating
+                + "]";
     }
+
 }
-
-
-
-/* id, nombre, fecha de estreno, descrición, género, rating, país, idioma*/
