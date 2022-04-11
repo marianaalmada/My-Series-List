@@ -22,6 +22,7 @@ public class User {
     private Long id;
     private String first_name;
     private String surname;
+    private String password;
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DramaList> list_created = new ArrayList<>();
@@ -29,13 +30,15 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
-    public User(Long id, String first_name, String surname, String email, List<DramaList> list_created) {
+    public User(Long id, String first_name, String surname, String password, List<DramaList> list_created,
+            String email) {
         this.id = id;
         this.first_name = first_name;
         this.surname = surname;
-        this.email = email;
+        this.password = password;
         this.list_created = list_created;
-    }
+        this.email = email;
+    }    
 
     public User() {
     }
@@ -78,6 +81,14 @@ public class User {
 
     public void setUser_lists(List<DramaList> list_created) {
         this.list_created = list_created;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
