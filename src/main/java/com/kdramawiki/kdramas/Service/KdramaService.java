@@ -22,19 +22,22 @@ public class KdramaService {
         this.kdramaRepository = kdramaRepository;
     }
 
+    //Obtener todos los dramas
     public List<Kdrama> getKdrama() {
         return kdramaRepository.findAll();
     }
 
+    //Agregar un nuevo drama
     public Kdrama addKdrama(Kdrama kdrama) {
         return kdramaRepository.save(kdrama);
     }
 
+    //Eliminar un drama
     public void deleteDrama(Long id) {
         kdramaRepository.deleteById(id);
     }
 
-    // @Transactional
+    // Modificar un drama
     public Kdrama updateDrama(Long kdramaId, Kdrama kdrama) {
         Kdrama drama = kdramaRepository.findById(kdramaId).get();
         drama.setName(kdrama.getName());

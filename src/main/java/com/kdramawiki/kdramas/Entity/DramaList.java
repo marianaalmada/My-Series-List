@@ -71,6 +71,10 @@ public class DramaList {
         this.user_id = user_id;
     }
 
+    public void addDrama(Kdrama kdrama) {
+        drama.add(kdrama);
+    }
+
     @Override
     public String toString() {
         return "DramaList [drama=" + drama + ", id=" + id + ", name=" + name + ", user_id=" + user_id + "]";

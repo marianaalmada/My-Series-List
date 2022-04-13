@@ -11,7 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint; 
+import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnore; 
 
 @Entity 
 @Table(name = "kdrama",
@@ -40,6 +42,7 @@ public class Kdrama {
     private String country;
     private String language;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "drama")
     private List<DramaList> list = new ArrayList<>();
 
