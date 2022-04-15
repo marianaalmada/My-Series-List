@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "list")
 public class DramaList {
@@ -26,6 +28,7 @@ public class DramaList {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Kdrama> drama = new ArrayList<>();
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user_id;
 
@@ -67,7 +70,7 @@ public class DramaList {
         return user_id;
     }
 
-    public void setList_owner(User user_id) {
+    public void setUser_id(User user_id) {
         this.user_id = user_id;
     }
 

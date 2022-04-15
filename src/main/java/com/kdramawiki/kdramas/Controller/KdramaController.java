@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
@@ -47,4 +48,9 @@ public class KdramaController {
     public Kdrama updateDrama(@PathVariable("kdramaId") Long dramaId, @RequestBody Kdrama drama) {
         return kdramaService.updateDrama(dramaId, drama);
     } 
+
+    @GetMapping(path= "/dramaByName")
+    public Kdrama getDramaByName(@RequestParam("name") String name) {
+        return kdramaService.dramaByName(name);
+    }
 }

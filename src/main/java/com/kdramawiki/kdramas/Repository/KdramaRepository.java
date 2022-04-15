@@ -10,4 +10,5 @@ import com.kdramawiki.kdramas.Entity.Kdrama;
 @Repository
 public interface KdramaRepository extends JpaRepository<Kdrama, Long> /*indicar tipo de objeto y el tipo del ID*/ {
     
+    Kdrama findKdramaByName(String name);
 }

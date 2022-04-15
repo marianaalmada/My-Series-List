@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DramaListRepository extends JpaRepository<DramaList, Long> {
     
+    DramaList findByName(String name);
 }

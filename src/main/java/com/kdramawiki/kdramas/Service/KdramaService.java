@@ -43,4 +43,9 @@ public class KdramaService {
         drama.setName(kdrama.getName());
         return kdramaRepository.save(drama);
     }
+
+    // Buscar drama por nombre
+    public Kdrama dramaByName(String name) {
+        return kdramaRepository.findKdramaByName(name);
+    }
 }

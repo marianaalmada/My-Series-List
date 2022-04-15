@@ -5,7 +5,9 @@ import java.util.Optional;
 
 import com.kdramawiki.kdramas.Entity.DramaList;
 import com.kdramawiki.kdramas.Entity.Kdrama;
+import com.kdramawiki.kdramas.Entity.User;
 import com.kdramawiki.kdramas.Repository.DramaListRepository;
+import com.kdramawiki.kdramas.Repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,14 +15,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class DramaListService {
     private final DramaListRepository dramaListRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public DramaListService(DramaListRepository dramaListRepository) {
+    public DramaListService(DramaListRepository dramaListRepository, UserRepository userRepository) {
         this.dramaListRepository = dramaListRepository;
+        this.userRepository = userRepository;
     }
 
     // crear una lista
-    public DramaList createList(DramaList list) {
+    public DramaList createList(Long userId, DramaList list) { 
+        User user = userRepository.getById(userId);
+        list.setUser_id(user);
         return dramaListRepository.save(list);
     }
 
@@ -55,5 +61,10 @@ public class DramaListService {
     }
 
     // eliminar dramas de una lista
+
+    // buscar lista por nombre
+    public DramaList listByName(String name) {
+        return dramaListRepository.findByName(name);
+    }
     
 }
