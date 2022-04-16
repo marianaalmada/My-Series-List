@@ -26,7 +26,7 @@ public class DramaListService {
     // crear una lista
     public DramaList createList(Long userId, DramaList list) { 
         User user = userRepository.getById(userId);
-        list.setUser_id(user);
+        list.setuser(user);
         return dramaListRepository.save(list);
     }
 
@@ -66,5 +66,10 @@ public class DramaListService {
     public DramaList listByName(String name) {
         return dramaListRepository.findByName(name);
     }
-    
+
+    // Obtener todas las listas de un usuario
+    public List<DramaList> listCreatedByUser(Long user_id) {
+        User user = userRepository.getById(user_id);
+        return user.getList_created();
+    }
 }

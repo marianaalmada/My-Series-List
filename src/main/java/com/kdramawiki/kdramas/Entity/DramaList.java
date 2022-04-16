@@ -30,13 +30,13 @@ public class DramaList {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    private User user_id;
+    private User user;
 
-    public DramaList(Long id, String name, List<Kdrama> drama, User user_id) {
+    public DramaList(Long id, String name, List<Kdrama> drama, User user) {
         this.id = id;
         this.name = name;
         this.drama = drama;
-        this.user_id = user_id;
+        this.user = user;
     }
 
     public DramaList() {
@@ -66,12 +66,12 @@ public class DramaList {
         this.drama = drama;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getuser() {
+        return user;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setuser(User user) {
+        this.user = user;
     }
 
     public void addDrama(Kdrama kdrama) {
@@ -80,7 +80,7 @@ public class DramaList {
 
     @Override
     public String toString() {
-        return "DramaList [drama=" + drama + ", id=" + id + ", name=" + name + ", user_id=" + user_id + "]";
+        return "DramaList [drama=" + drama + ", id=" + id + ", name=" + name + ", user=" + user + "]";
     }
 
 }

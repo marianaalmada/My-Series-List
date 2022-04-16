@@ -71,4 +71,10 @@ public class DramaListController {
     public DramaList getListByName(@RequestParam("name") String name) {
         return dramaListService.listByName(name);
     }
+
+    // Obtener todas las listas creadas por un usuario
+    @GetMapping("/user/{user_id}/list")
+    public List<DramaList> getListCreatedByUser(@PathVariable("user_id") Long user_id) {
+        return dramaListService.listCreatedByUser(user_id);
+    }
 }

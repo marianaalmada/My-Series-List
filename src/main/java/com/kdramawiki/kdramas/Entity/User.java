@@ -24,7 +24,7 @@ public class User {
     private String surname;
     private String password;
 
-    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DramaList> list_created = new ArrayList<>();
 
     @Column(name = "email", unique = true)
