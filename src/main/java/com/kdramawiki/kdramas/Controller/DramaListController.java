@@ -62,8 +62,9 @@ public class DramaListController {
 
     // eliminar dramas de una lista 
     @DeleteMapping("list/{list_id}/drama/{drama_id}") 
-    public void deleteDramaFromList(@PathVariable("list_id") Long list_id, Kdrama drama) {
-        dramaListService.deleteDramaFromList(list_id, drama);
+    public void deleteDramaFromList(@PathVariable("list_id") Long list_id, 
+                                    @PathVariable("drama_id") Long dramaId) {
+        dramaListService.deleteDramaFromList(list_id, dramaId);
     }
 
     // buscar lista por nombre

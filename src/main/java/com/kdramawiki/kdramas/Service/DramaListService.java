@@ -7,6 +7,7 @@ import com.kdramawiki.kdramas.Entity.DramaList;
 import com.kdramawiki.kdramas.Entity.Kdrama;
 import com.kdramawiki.kdramas.Entity.User;
 import com.kdramawiki.kdramas.Repository.DramaListRepository;
+import com.kdramawiki.kdramas.Repository.KdramaRepository;
 import com.kdramawiki.kdramas.Repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,21 @@ import org.springframework.stereotype.Service;
 public class DramaListService {
     private final DramaListRepository dramaListRepository;
     private final UserRepository userRepository;
+    private final KdramaRepository kdramaRepository;
 
     @Autowired
+    public DramaListService(DramaListRepository dramaListRepository, UserRepository userRepository,
+            KdramaRepository kdramaRepository) {
+        this.dramaListRepository = dramaListRepository;
+        this.userRepository = userRepository;
+        this.kdramaRepository = kdramaRepository;
+    }
+
+    /*@Autowired
     public DramaListService(DramaListRepository dramaListRepository, UserRepository userRepository) {
         this.dramaListRepository = dramaListRepository;
         this.userRepository = userRepository;
-    }
+    }*/
 
     // crear una lista
     public DramaList createList(Long userId, DramaList list) { 
@@ -55,9 +65,11 @@ public class DramaListService {
     }
 
     // eliminar dramas de una lista SOLUCIONAR
-    public void deleteDramaFromList(Long listId, Kdrama drama) {
+    public void deleteDramaFromList(Long listId, Long dramaId) {
         DramaList list = dramaListRepository.getById(listId);
+        Kdrama drama = kdramaRepository.getById(dramaId);
         list.removeDrama(drama);
+        dramaListRepository.save(list);
     }
 
     // buscar lista por nombre
