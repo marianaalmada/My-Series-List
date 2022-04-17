@@ -78,6 +78,10 @@ public class DramaList {
         drama.add(kdrama);
     }
 
+    public void removeDrama(Kdrama kdrama) {
+        drama.remove(kdrama);
+    }
+
     @Override
     public String toString() {
         return "DramaList [drama=" + drama + ", id=" + id + ", name=" + name + ", user=" + user + "]";

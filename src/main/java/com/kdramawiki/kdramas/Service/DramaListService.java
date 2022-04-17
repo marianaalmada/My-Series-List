@@ -47,20 +47,18 @@ public class DramaListService {
     }
 
     // modificar una lista por id
-    public DramaList updateList(Long listId, DramaList dramaList) {
+    public DramaList updateList(Long listId, DramaList dramaList, Kdrama drama) {
         DramaList list = dramaListRepository.getById(listId);
         list.setName(dramaList.getName());
+        list.addDrama(drama);
         return dramaListRepository.save(list);
     }
 
-    // agregar dramas a la lista
-    public DramaList addDramaToList(Long listId, Kdrama drama) {
+    // eliminar dramas de una lista SOLUCIONAR
+    public void deleteDramaFromList(Long listId, Kdrama drama) {
         DramaList list = dramaListRepository.getById(listId);
-        list.addDrama(drama);;
-        return dramaListRepository.save(list);
+        list.removeDrama(drama);
     }
-
-    // eliminar dramas de una lista
 
     // buscar lista por nombre
     public DramaList listByName(String name) {

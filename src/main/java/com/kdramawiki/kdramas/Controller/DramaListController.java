@@ -52,19 +52,19 @@ public class DramaListController {
         dramaListService.deleteList(listId);
     }
 
-    // modificar una lista por id
-    @PutMapping("/list/{list_id}")
-    public DramaList modifyListById(@PathVariable("list_id") Long listId, @RequestBody DramaList dramaList) {
-        return dramaListService.updateList(listId, dramaList);
-    }
-
-    // agregar dramas a la lista
+    // modificar una lista por id y agregar un drama
     @PutMapping("/list/{list_id}/drama/{drama_id}")
-    public DramaList addDramaToList(@PathVariable("list_id") Long listId, @PathVariable("drama_id") Kdrama drama_id) {
-        return dramaListService.addDramaToList(listId, drama_id);
+    public DramaList modifyListById(@PathVariable("list_id") Long listId, 
+                                    @PathVariable("drama_id") Kdrama drama, 
+                                    @RequestBody DramaList dramaList) {
+        return dramaListService.updateList(listId, dramaList, drama);
     }
 
-    // eliminar dramas de una lista
+    // eliminar dramas de una lista 
+    @DeleteMapping("list/{list_id}/drama/{drama_id}") 
+    public void deleteDramaFromList(@PathVariable("list_id") Long list_id, Kdrama drama) {
+        dramaListService.deleteDramaFromList(list_id, drama);
+    }
 
     // buscar lista por nombre
     @GetMapping("/list/{name}")
