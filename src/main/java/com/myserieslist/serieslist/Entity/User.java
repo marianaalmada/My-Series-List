@@ -1,4 +1,4 @@
-package com.kdramawiki.kdramas.Entity;
+package com.myserieslist.serieslist.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "user")
 public class User {
@@ -20,23 +22,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
-    private String first_name;
+    private String name;
     private String surname;
+
+    @JsonIgnore
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DramaList> list_created = new ArrayList<>();
+    private List<SeriesList> listCreated = new ArrayList<>();
 
-    @Column(name = "email", unique = true)
+    @Column(unique = true)
     private String email;
 
-    public User(Long id, String first_name, String surname, String password, List<DramaList> list_created,
+    public User(Long id, String name, String surname, String password, List<SeriesList> listCreated,
             String email) {
         this.id = id;
-        this.first_name = first_name;
+        this.name = name;
         this.surname = surname;
         this.password = password;
-        this.list_created = list_created;
+        this.listCreated = listCreated;
         this.email = email;
     }    
 
@@ -51,12 +55,12 @@ public class User {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getName() {
+        return name;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getSurname() {
@@ -67,22 +71,6 @@ public class User {
         this.surname = surname;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<DramaList> getList_created() {
-        return list_created;
-    }
-
-    public void setUser_lists(List<DramaList> list_created) {
-        this.list_created = list_created;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -91,10 +79,26 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User [email=" + email + ", first_name=" + first_name + ", id=" + id + ", surname=" + surname
-                + ", user_lists=" + list_created + "]";
+    public List<SeriesList> getListCreated() {
+        return listCreated;
     }
 
+    public void setListCreated(List<SeriesList> listCreated) {
+        this.listCreated = listCreated;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User [email=" + email + ", id=" + id + ", listCreated=" + listCreated + ", name=" + name + ", password="
+                + password + ", surname=" + surname + "]";
+    }
+    
 }

@@ -1,9 +1,9 @@
-package com.kdramawiki.kdramas.Controller;
+package com.myserieslist.serieslist.Controller;
 
 import java.util.List;
 
-import com.kdramawiki.kdramas.Entity.User;
-import com.kdramawiki.kdramas.Service.UserService;
+import com.myserieslist.serieslist.Entity.User;
+import com.myserieslist.serieslist.Service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,31 +28,26 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Obtener todos los usuarios
     @GetMapping
     public List<User> getAllUsers() {
         return userService.getUsers();
     }
 
-    //Crear nuevo usuario
     @PostMapping
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
 
-    //Actualizar usuario por ID
     @PutMapping(path = "/{user_id}")
     public User modifyUser(@PathVariable("user_id") Long user_id, @RequestBody User user) {
         return userService.updateUser(user_id, user);
     }
 
-    // Eliminar usuarios
     @DeleteMapping(path = "/{user_id}")
     public void deleteUser(@PathVariable("user_id") Long user_id) {
         userService.deleteUser(user_id);
     }
 
-    // - Obtener un usuario por su nombre
     @GetMapping("/surname")
     public User getUserBySurname(@RequestParam("surname") String surname) {
         return userService.getUserBySurname(surname);

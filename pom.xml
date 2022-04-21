@@ -8,8 +8,8 @@
 		<version>2.6.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.kdramawiki</groupId>
-	<artifactId>kdramas</artifactId>
+	<groupId>com.myserieslist</groupId>
+	<artifactId>serieslist</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kdramas</name>
 	<description>Demo project for Spring Boot</description>

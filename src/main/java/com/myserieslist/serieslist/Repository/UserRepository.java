@@ -1,8 +1,8 @@
-package com.kdramawiki.kdramas.Repository;
+package com.myserieslist.serieslist.Repository;
 
 import java.util.Optional;
 
-import com.kdramawiki.kdramas.Entity.User;
+import com.myserieslist.serieslist.Entity.User;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

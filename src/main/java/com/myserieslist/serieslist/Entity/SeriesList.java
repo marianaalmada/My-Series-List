@@ -1,4 +1,4 @@
-package com.kdramawiki.kdramas.Entity;
+package com.myserieslist.serieslist.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "list")
-public class DramaList {
+public class SeriesList {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,20 +26,20 @@ public class DramaList {
     private String name;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Kdrama> drama = new ArrayList<>();
+    private List<Serie> serie = new ArrayList<>();
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    public DramaList(Long id, String name, List<Kdrama> drama, User user) {
+    public SeriesList(Long id, String name, List<Serie> serie, User user) {
         this.id = id;
         this.name = name;
-        this.drama = drama;
+        this.serie = serie;
         this.user = user;
     }
 
-    public DramaList() {
+    public SeriesList() {
     }
 
     public Long getId() {
@@ -58,12 +58,12 @@ public class DramaList {
         this.name = name;
     }
 
-    public List<Kdrama> getDrama() {
-        return drama;
+    public List<Serie> getSerie() {
+        return serie;
     }
 
-    public void setDrama(List<Kdrama> drama) {
-        this.drama = drama;
+    public void setserie(List<Serie> serie) {
+        this.serie = serie;
     }
 
     public User getuser() {
@@ -74,17 +74,17 @@ public class DramaList {
         this.user = user;
     }
 
-    public void addDrama(Kdrama kdrama) {
-        drama.add(kdrama);
+    public void addSerie(Serie serieObj) {
+        serie.add(serieObj);
     }
 
-    public void removeDrama(Kdrama kdrama) {
-        drama.remove(kdrama);
+    public void removeSerie(Serie serieObj) {
+        serie.remove(serieObj);
     }
 
     @Override
     public String toString() {
-        return "DramaList [drama=" + drama + ", id=" + id + ", name=" + name + ", user=" + user + "]";
+        return "serieList [serie=" + serie + ", id=" + id + ", name=" + name + ", user=" + user + "]";
     }
 
 }
