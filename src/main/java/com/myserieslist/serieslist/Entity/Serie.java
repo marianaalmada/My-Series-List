@@ -20,7 +20,7 @@ public class Serie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id") // Es buena práctica
+    @Column(name = "id") 
     private Long id;
 
     @Column(nullable = false) 
@@ -32,19 +32,21 @@ public class Serie {
             columnDefinition = "TEXT") 
     private String description;
 
-    private String genre;
+    @ManyToMany(mappedBy = "series")
+    private List<Category> category  = new ArrayList<>();
     private float rating;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "serie")
     private List<SeriesList> list = new ArrayList<>();
 
-    public Serie(Long id, String name, LocalDate date, String description, String genre, float rating, List<SeriesList> list) {
+    public Serie(Long id, String name, LocalDate date, String description, List<Category> category, 
+            float rating, List<SeriesList> list) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.description = description;
-        this.genre = genre;
+        this.category = category;
         this.rating = rating;
         this.list = list;
     }
@@ -84,12 +86,12 @@ public class Serie {
         this.description = description;
     }
 
-    public String getGenre() {
-        return genre;
+    public List<Category> getcategory() {
+        return category;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setcategory(List<Category> category) {
+        this.category = category;
     }
 
     public float getRating() {
@@ -110,7 +112,7 @@ public class Serie {
 
     @Override
     public String toString() {
-        return "Serie [date=" + date + ", description=" + description + ", genre=" + genre + ", id=" + id + ", list="
+        return "Serie [date=" + date + ", description=" + description + ", category=" + category + ", id=" + id + ", list="
                 + list + ", name=" + name + ", rating=" + rating + "]";
     }
 
