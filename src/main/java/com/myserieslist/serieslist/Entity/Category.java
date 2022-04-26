@@ -59,6 +59,14 @@ public class Category {
         this.series = series;
     }
 
+    public void addSerie(Serie newSerie) {
+        series.add(newSerie);
+    }
+
+    public void removeSerie(Serie newSerie) {
+        series.remove(newSerie);
+    }
+
     @Override
     public String toString() {
         return "Category [id=" + id + ", name=" + name + ", series=" + series + "]";

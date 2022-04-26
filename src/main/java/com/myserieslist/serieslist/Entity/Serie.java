@@ -32,6 +32,7 @@ public class Serie {
             columnDefinition = "TEXT") 
     private String description;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "series")
     private List<Category> category  = new ArrayList<>();
     private float rating;
