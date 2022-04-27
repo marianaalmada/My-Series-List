@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.myserieslist.serieslist.Entity.Category;
 import com.myserieslist.serieslist.Entity.Serie;
+import com.myserieslist.serieslist.Exception.SerieExistsInCategory;
 import com.myserieslist.serieslist.Repository.CategoryRepository;
 import com.myserieslist.serieslist.Repository.SerieRepository;
 
@@ -47,8 +48,13 @@ public class CategoryService {
     public Category updateCategory(Long categoryId, Long serieId) {
         Category category = categoryRepository.findById(categoryId).get();
         Serie serie = serieRepository.findById(serieId).get();
-        category.addSerie(serie);
-        return categoryRepository.save(category);
+        if (categoryRepository.findByIdAndSeries(categoryId, serie).isPresent()) {
+            throw new SerieExistsInCategory("The serie already exists in Category");
+        } else {
+            category.addSerie(serie);
+            return categoryRepository.save(category);
+        }
+        
     }
 
     public void removeSerie(Long categoryId, Long serieId) {

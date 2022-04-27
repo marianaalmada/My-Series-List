@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.myserieslist.serieslist.Entity.User;
+import com.myserieslist.serieslist.Exception.EmailNotValid;
 import com.myserieslist.serieslist.Repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class UserService {
     public User createUser(User user) {
         Optional<User> userOptional = userRepository.findUserByEmail(user.getEmail());
         if (userOptional.isPresent()) {
-            throw new RuntimeException("The email already exists");
+            throw new EmailNotValid("The email already exists");
         } else {
             return userRepository.save(user); 
         }   
